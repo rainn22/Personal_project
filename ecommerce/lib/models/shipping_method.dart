@@ -15,11 +15,12 @@ class ShippingMethodProvider with ChangeNotifier {
 }
 
 enum ShippingMethod {
-  pickup('Pick up at store', 0.00),
-  delivery('Delivery', 2.00);
+  pickup('Pick up at store', 0.00, 'No'),
+  delivery('Delivery', 2.00, 'Cash on Delivery');
 
   final String label;
   final double deliveryFee;
+  final String paymentMethod;
 
-  const ShippingMethod(this.label, this.deliveryFee);
+  const ShippingMethod(this.label, this.deliveryFee, this.paymentMethod);
 }

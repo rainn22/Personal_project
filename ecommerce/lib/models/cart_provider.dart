@@ -6,6 +6,14 @@ class CartProvider with ChangeNotifier {
 
   List<CartItem> get cartItems => _cartItems;
 
+  double get subtotal {
+    double total = 0.0;
+    for (var cartItem in _cartItems) {
+      total += cartItem.product.price * cartItem.quantity;
+    }
+    return total;
+  }
+
   void addToCart(CartItem item) {
     final existingItemIndex = _cartItems.indexWhere((cartItem) => cartItem.product.id == item.product.id);
     if (existingItemIndex >= 0) {

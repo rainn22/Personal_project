@@ -1,5 +1,5 @@
 import 'package:ecommerce/models/cart_provider.dart';
-import 'package:ecommerce/models/customization_provider.dart';
+import 'package:ecommerce/models/customization.dart';
 import 'package:ecommerce/models/shipping_method.dart';
 import 'package:ecommerce/screens/customization.dart';
 import 'package:ecommerce/screens/menu.dart';

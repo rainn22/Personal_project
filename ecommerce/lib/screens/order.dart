@@ -1,13 +1,14 @@
-import 'package:ecommerce/models/customization_provider.dart';
+import 'package:ecommerce/models/cart_provider.dart';
+import 'package:ecommerce/models/customization.dart';
 import 'package:ecommerce/models/shipping_method.dart';
+import 'package:ecommerce/widget/main_screen_app_bar.dart';
+import 'package:ecommerce/widget/order_summary.dart';
+import 'package:ecommerce/widget/product_row_card_with_update_quantity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ecommerce/models/cart_provider.dart';
-import 'package:ecommerce/widget/product_row_card_with_update_quantity.dart';
-import 'package:ecommerce/widget/main_screen_app_bar.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+  const OrderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +16,10 @@ class OrderScreen extends StatelessWidget {
     final shippingMethodProvider = Provider.of<ShippingMethodProvider>(context);
     final customizationProvider = Provider.of<CustomizationProvider>(context);
 
-
-    // Calculate subtotal
-    double subtotal = 0.0;
-    for (var cartItem in cartProvider.cartItems) {
-      subtotal += cartItem.product.price * cartItem.quantity;
-    }
-
-    // Calculate delivery fee based on selected shipping method
-    double deliveryFee = shippingMethodProvider.deliveryFee; 
-
-    // Calculate wrap gift fee based on selected customization
-    double wrapFee = customizationProvider.wrapFee;
-
-    // Calculate total
-    double total = subtotal + deliveryFee;
+    double subtotalFromCart = cartProvider.subtotal;
+    double deliveryFeeFromShipping = shippingMethodProvider.deliveryFee;
+    double wrapFeeFromCustomize = customizationProvider.wrapFee;
+    double totalCalculation = subtotalFromCart + deliveryFeeFromShipping + wrapFeeFromCustomize;
 
     return Scaffold(
       appBar: const CustomAppBar(appBarType: AppBarType.other),
@@ -73,7 +63,6 @@ class OrderScreen extends StatelessWidget {
                 },
               ),
             ),
-            // Payment Method Section
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
@@ -120,92 +109,11 @@ class OrderScreen extends StatelessWidget {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'SUB TOTAL',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '\$${subtotal.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFF98CA0),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'DELIVERY FEE',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '\$${deliveryFee.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFF98CA0),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'WRAP GIFT',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '\$${wrapFee.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFF98CA0),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'TOTAL',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      Text(
-                        '\$${total.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFF98CA0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            OrderSummary(
+              subtotal: subtotalFromCart,
+              deliveryFee: deliveryFeeFromShipping,
+              wrapFee: wrapFeeFromCustomize,
+              total: totalCalculation,
             ),
           ],
         ),
