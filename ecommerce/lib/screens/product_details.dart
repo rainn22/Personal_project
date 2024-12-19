@@ -1,6 +1,5 @@
 import 'package:ecommerce/models/cart_provider.dart';
 import 'package:ecommerce/models/product_detail.dart';
-import 'package:ecommerce/models/cart_item.dart';
 import 'package:ecommerce/widget/main_screen_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -96,9 +95,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Provider.of<CartProvider>(context, listen: false).addToCart(cartItem);
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('This product has been added to your cart!'),
-                    duration: Duration(seconds: 2), // Snackbar will show for 2 seconds
+                  SnackBar(
+                    content: const Text('This product has been added to your cart!'),
+                    duration: const Duration(seconds: 5), 
+                    action: SnackBarAction(
+                      label: 'Visit Cart',
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                    ),
                   ),
                 );
               },

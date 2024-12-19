@@ -1,4 +1,3 @@
-import 'package:ecommerce/models/cart_item.dart';
 import 'package:ecommerce/models/product_detail.dart';
 import 'package:flutter/material.dart';
 
@@ -31,4 +30,11 @@ class CartProvider with ChangeNotifier {
       notifyListeners(); // Notify listeners about the change
     }
   }
+}
+
+class CartItem {
+  final ProductDetail product;
+  int quantity;
+
+  CartItem({required this.product, this.quantity = 1});
 }

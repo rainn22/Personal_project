@@ -24,7 +24,7 @@ class CustomTypeButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: isSelected ? const Color(0xFFF98CA0) : const Color(0xFF888888), // White text if selected, dark grey if unselected
+          color: isSelected ? const Color(0xFFF98CA0) : const Color(0xFF888888),
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),

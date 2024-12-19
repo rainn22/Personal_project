@@ -25,7 +25,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context); // Access CartProvider
+    final cartProvider = Provider.of<CartProvider>(context);
 
     // Calculate subtotal
     double subtotal = 0.0;
@@ -42,19 +42,19 @@ class _CartScreenState extends State<CartScreen> {
                 // Cart Items List
                 Expanded(
                   child: ListView.builder(
+                    physics: const BouncingScrollPhysics(), 
                     itemCount: cartProvider.cartItems.length,
                     itemBuilder: (context, index) {
                       final cartItem = cartProvider.cartItems[index];
                       return CartItemWidget(
                         cartItem: cartItem,
                         onRemove: () {
-                          // Remove item from cart
                           cartProvider.removeFromCart(cartItem.product);
                         },
                         onEditQuantity: (newQuantity) {
-                          // Update quantity of cart item
                           cartProvider.editQuantity(cartItem.product, newQuantity);
                         },
+                        mode: CardMode.cartScreen,
                       );
                     },
                   ),

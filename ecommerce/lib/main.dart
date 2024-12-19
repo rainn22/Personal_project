@@ -1,7 +1,10 @@
 import 'package:ecommerce/models/cart_provider.dart';
-import 'package:ecommerce/screens/customzation.dart';
+import 'package:ecommerce/models/customization_provider.dart';
+import 'package:ecommerce/models/shipping_method.dart';
+import 'package:ecommerce/screens/customization.dart';
 import 'package:ecommerce/screens/menu.dart';
 import 'package:ecommerce/screens/order.dart';
+import 'package:ecommerce/screens/receipt.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/cart.dart';
@@ -12,12 +15,17 @@ import 'screens/login.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => CartProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => ShippingMethodProvider()),
+        ChangeNotifierProvider(create: (_) => CustomizationProvider()),
+      ],
       child: const MyApp(),
     ),
   );
 }
+
 
 
 class MyApp extends StatelessWidget {
@@ -34,11 +42,12 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(), //login
         '/home': (context) => HomeScreen(), //main
         '/category': (context) => const CategoryScreen(), //main
-        '/cart': (context) => const CartScreen(), //main and other
+        '/cart': (context) => const CartScreen(), //main
         '/profile': (context) => const ProfileScreen(), //main
         '/menu': (context) => const MenuScreen(), //logout
         '/customization': (context) => const CustomzationScreen(), //other, continue, 2 choices to order
-        '/order' : (context) => const OrderScreen(), //customer address invole with login, new method (pick up and payment), order summary()
+        '/order' : (context) => const OrderScreen(), 
+        '/receipt' : (context) => const ReceiptScreen(), 
       },
     );
   }

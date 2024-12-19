@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce/widget/bottom_navigation_bar.dart';
 import 'package:ecommerce/widget/main_screen_app_bar.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ReceiptScreen extends StatefulWidget {
+  const ReceiptScreen({Key? key}) : super(key: key);
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _ReceiptScreenState createState() => _ReceiptScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ReceiptScreenState extends State<ReceiptScreen> {
   int _currentIndex = 3;
 
   void _onItemTapped(int index) {
@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: const CustomAppBar(appBarType: AppBarType.mainScreen),
       body: const Center(
-        child: Text('Profile Screen'), 
+        child: Text('Receipt Screen'), 
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex, 
