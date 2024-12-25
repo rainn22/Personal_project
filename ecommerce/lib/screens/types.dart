@@ -8,10 +8,10 @@ import 'package:ecommerce/widget/bottom_navigation_bar.dart';
 import 'package:ecommerce/widget/main_screen_app_bar.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+  const CategoryScreen({super.key});
 
   @override
-  _CategoryScreenState createState() => _CategoryScreenState();
+  State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
@@ -114,37 +114,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
               padding: const EdgeInsets.all(16.0),
               child: GridView.builder(
                 shrinkWrap: true,
-                physics: const BouncingScrollPhysics(), // Makes the grid scrollable with bounce effect
+                physics: const BouncingScrollPhysics(), 
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, 
                   crossAxisSpacing: 10.0, 
                   mainAxisSpacing: 10.0,
-                  mainAxisExtent: 350, // Set fixed height for each card
+                  mainAxisExtent: 380, 
                 ),
                 itemCount: filteredProducts.length,
                 itemBuilder: (context, index) {
                   final product = filteredProducts[index];
                   return ProductCard(product: product);
                 },
-              ),
-            ),
-            // View more button
-            Center(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.grey), // Set the border color
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangular shape (no rounded corners)
-                ),
-                onPressed: () {
-                  // Handle action for the 'View More' button
-                },
-                child: const Text(
-                  'VIEW MORE',
-                  style: TextStyle(
-                    color: Colors.black, // Set the text color
-                  ),
-                ),
               ),
             ),
             const SizedBox(height: 20),

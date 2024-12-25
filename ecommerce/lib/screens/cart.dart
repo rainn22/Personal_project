@@ -7,16 +7,15 @@ import 'package:ecommerce/widget/main_screen_app_bar.dart';
 import 'package:ecommerce/widget/pink_button.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({super.key});
 
   @override
-  _CartScreenState createState() => _CartScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
   int _currentIndex = 2;
 
-  // Handle BottomNavBar tap
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -27,14 +26,12 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
 
-    // Calculate subtotal
-    double subtotal = 0.0;
-    for (var cartItem in cartProvider.cartItems) {
-      subtotal += cartItem.product.price * cartItem.quantity;
-    }
+    final isFromBottomNav = Navigator.canPop(context) == false;
 
     return Scaffold(
-      appBar: const CustomAppBar(), // Use your custom app bar
+      appBar: CustomAppBar(
+        appBarType: isFromBottomNav ? AppBarType.mainScreen : AppBarType.other,
+      ),
       body: cartProvider.cartItems.isEmpty
           ? const Center(child: Text('Your cart is empty!'))
           : Column(
@@ -59,6 +56,7 @@ class _CartScreenState extends State<CartScreen> {
                     },
                   ),
                 ),
+
                 // Subtotal
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -73,7 +71,7 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ),
                       Text(
-                        '\$${subtotal.toStringAsFixed(2)}',
+                        '\$${cartProvider.subtotal.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -83,6 +81,7 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ),
                 ),
+
                 // "Buy Now" Button
                 Padding(
                   padding: const EdgeInsets.all(16.0),

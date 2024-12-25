@@ -71,6 +71,9 @@ flutter:
   - assets/handmade_vase.jpg
   - assets/handmade_vase2.jpg
   - assets/aoy.png
+  - assets/poster.png
+  - assets/great_adventure_book.jpg
+  - assets/art_of_painting_book.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

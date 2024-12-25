@@ -4,21 +4,21 @@ final List<User> users = [
   User(
     name: 'Sokha',
     phoneNumber: '0123456789',
-    province: Province.phnomPenh,
+    province: 'Phnom Penh',
     commune: 'Chamkar Mon',
     password: '123'
   ),
   User(
     name: 'Dara',
     phoneNumber: '0987654321',
-    province: Province.kampongCham,
+    province: 'Kampong Cham',
     commune: 'Prey Chhor',
     password: '123'
   ),
   User(
     name: 'Molika',
     phoneNumber: '011223344',
-    province: Province.phnomPenh,
+    province: 'Phnom Penh',
     commune: 'Chroy Chongvar',
     password: '123'
   ),

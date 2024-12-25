@@ -1,15 +1,37 @@
-class Customization {
-  WrapGiftChoices wrapGiftChoice;
-  GiftCard giftCardChoice;
-  String userMessage;
+import 'package:flutter/material.dart';
 
-  Customization({
-    this.wrapGiftChoice = WrapGiftChoices.paperbag,
-    this.giftCardChoice = GiftCard.simple,
-    this.userMessage = "",
-  });
+class CustomizationProvider with ChangeNotifier {
+  WrapGiftChoices _wrapGiftChoice = WrapGiftChoices.paperbag;
+  GiftCard _giftCardChoice = GiftCard.simple;
+  String _userMessage = "";
 
-  double get wrapGiftPrice => wrapGiftChoice.price; 
+  WrapGiftChoices get wrapGiftChoice => _wrapGiftChoice;
+  GiftCard get giftCardChoice => _giftCardChoice;
+  String get userMessage => _userMessage;
+
+  double get wrapFee => _wrapGiftChoice.price;
+
+  void selectWrapGiftChoice(WrapGiftChoices choice) {
+    _wrapGiftChoice = choice;
+    notifyListeners();
+  }
+
+  void selectGiftCardChoice(GiftCard card) {
+    _giftCardChoice = card;
+    notifyListeners();
+  }
+
+  void updateUserMessage(String message) {
+    _userMessage = message;
+    notifyListeners();
+  }
+
+  void clearCustomization() {
+    _wrapGiftChoice = WrapGiftChoices.paperbag;
+    _giftCardChoice = GiftCard.simple;
+    _userMessage = "";
+    notifyListeners();
+  }
 }
 
 enum WrapGiftChoices {

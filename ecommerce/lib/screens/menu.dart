@@ -1,9 +1,11 @@
+import 'package:ecommerce/models/user.dart';
 import 'package:ecommerce/widget/pink_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({Key? key}) : super(key: key);
+  const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class MenuScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop(); // Go back to the previous screen
+            Navigator.of(context).pop(); 
           },
         ),
       ),
@@ -23,29 +25,20 @@ class MenuScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Menu Items
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Setting'),
-              onTap: () {
-                // Handle setting tap
-              },
+            const ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Setting'),
             ),
-            ListTile(
-              leading: const Icon(Icons.help),
-              title: const Text('Help Center'),
-              onTap: () {
-                // Handle help center tap
-              },
+            const ListTile(
+              leading: Icon(Icons.help),
+              title: Text('Help Center'),
             ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About Us'),
-              onTap: () {
-                // Handle about us tap
-              },
+            const ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About Us'),
             ),
 
-            const Spacer(), // Pushes the bottom widgets down
+            const Spacer(), 
 
             // Location and social media
             const Row(
@@ -62,19 +55,16 @@ class MenuScreen extends StatelessWidget {
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.squareFacebook, size: 28),
                   onPressed: () {
-                    // Add action for Instagram button
                   },
                 ),
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.instagram, size: 28),
                   onPressed: () {
-                    // Add action for Instagram button
                   },
                 ),
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.youtube, size: 28),
                   onPressed: () {
-                    // Add action for Instagram button
                   },
                 ),
               ],
@@ -84,7 +74,8 @@ class MenuScreen extends StatelessWidget {
             PinkButton(
               text: 'Logout',
               onPressed: () {
-                Navigator.pushNamed(context, '/login'); // Navigate to login page
+                Provider.of<UserProvider>(context, listen: false).logout();
+                Navigator.pushNamed(context, '/login');
               },
             ),
           ],

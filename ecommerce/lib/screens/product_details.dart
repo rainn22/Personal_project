@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class ProductDetails extends StatefulWidget {
   final ProductDetail product;
 
-  const ProductDetails({Key? key, required this.product}) : super(key: key);
+  const ProductDetails({super.key, required this.product});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -90,14 +90,13 @@ class _ProductDetailsState extends State<ProductDetails> {
           children: [
             ElevatedButton.icon(
               onPressed: () {
-                // Create a CartItem from the current product and add it to the cart
                 final cartItem = CartItem(product: widget.product);
                 Provider.of<CartProvider>(context, listen: false).addToCart(cartItem);
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: const Text('This product has been added to your cart!'),
-                    duration: const Duration(seconds: 5), 
+                    duration: const Duration(seconds: 3), 
                     action: SnackBarAction(
                       label: 'Visit Cart',
                       onPressed: () {

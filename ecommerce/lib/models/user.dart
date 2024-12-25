@@ -1,22 +1,9 @@
-enum Province {
-  phnomPenh('Phnom Penh'),
-  kampongCham('Kampong Cham'),
-  siemReab('Siem Reap'),
-  battambang('Battambang'),
-  kapot('Kampot'),
-  kep('Kep'),
-  kps('Preah Sihanouk'),
-  mdk('Mondulkiri');
-
-  final String label;
-
-  const Province(this.label);
-}
+import 'package:flutter/material.dart';
 
 class User{
   final String name;
   final String phoneNumber;
-  final Province province;
+  final String province;
   final String commune;
   final String password;
 
@@ -27,4 +14,31 @@ class User{
     required this.commune, 
     required this.password,
   });
+}
+
+class UserProvider extends ChangeNotifier {
+  User? _loggedInUser;
+
+  User? get loggedInUser => _loggedInUser;
+
+  final List<User> _users;
+
+  UserProvider({required List<User> users}) : _users = users;
+
+  bool login(String username, String password) {
+    try {
+      _loggedInUser = _users.firstWhere(
+        (user) => user.name == username && user.password == password,
+      );
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false; 
+    }
+  }
+
+  void logout() {
+    _loggedInUser = null;
+    notifyListeners();
+  }
 }

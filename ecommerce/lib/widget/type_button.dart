@@ -6,11 +6,11 @@ class CustomTypeButton extends StatelessWidget {
   final bool isSelected;
 
   const CustomTypeButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     required this.isSelected, 
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PinkButton extends StatelessWidget {
-  final String text;  // Text to display on the button
-  final VoidCallback onPressed;  // Callback for the onPressed action
+  final String text;  
+  final VoidCallback onPressed;  
 
   const PinkButton({
-    Key? key,
-    required this.text,  // Make text required
-    required this.onPressed,  // Make onPressed required
-  }) : super(key: key);
+    super.key,
+    required this.text, 
+    required this.onPressed,  
+  });
 
   @override
   Widget build(BuildContext context) {

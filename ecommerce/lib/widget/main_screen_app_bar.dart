@@ -5,7 +5,7 @@ enum AppBarType { mainScreen, other }
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBarType appBarType;
 
-  const CustomAppBar({Key? key, this.appBarType = AppBarType.mainScreen}) : super(key: key);
+  const CustomAppBar({super.key, this.appBarType = AppBarType.mainScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         width: 60,
         height: 60,
       ),
-      // Show back button if not on the main screen
       leading: appBarType == AppBarType.mainScreen
           ? IconButton(
               icon: const Icon(Icons.menu),
@@ -27,7 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pop(context); // Go back
+                Navigator.pop(context);
               },
             ),
       actions: [

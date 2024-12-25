@@ -21,21 +21,25 @@ class CartProvider with ChangeNotifier {
     } else {
       _cartItems.add(item);
     }
-    notifyListeners(); // Notify listeners about the change
+    notifyListeners(); 
   }
 
-  // Remove a product from the cart
   void removeFromCart(ProductDetail product) {
     _cartItems.removeWhere((cartItem) => cartItem.product.id == product.id);
-    notifyListeners(); // Notify listeners about the change
+    notifyListeners(); 
   }
 
-  // Edit the quantity of an item in the cart
+  void clearCart() {
+    _cartItems.clear();
+    notifyListeners(); 
+  }
+
+
   void editQuantity(ProductDetail product, int newQuantity) {
     final index = _cartItems.indexWhere((cartItem) => cartItem.product.id == product.id);
     if (index >= 0 && newQuantity > 0) {
       _cartItems[index].quantity = newQuantity;
-      notifyListeners(); // Notify listeners about the change
+      notifyListeners(); 
     }
   }
 }

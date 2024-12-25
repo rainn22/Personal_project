@@ -1,22 +1,25 @@
-import 'package:ecommerce/data/users.dart'; // Assuming users are stored in this data
+import 'package:ecommerce/models/user.dart';
 import 'package:ecommerce/widget/pink_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginScreen({super.key});
+
   void handleLogin(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
     String enteredUsername = usernameController.text;
     String enteredPassword = passwordController.text;
 
-    bool isUserFound = users.any((user) =>
-        user.name == enteredUsername && user.password == enteredPassword);
+    bool isLoginSuccessful = userProvider.login(enteredUsername, enteredPassword);
 
-    if (isUserFound) {
+    if (isLoginSuccessful) {
       Navigator.pushReplacementNamed(context, '/home');
     } else {
-      // Show an error message
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Invalid username or password. Please try again."),
@@ -35,7 +38,6 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Welcome caption
             const Text(
               "Welcome \nBack!",
               style: TextStyle(
@@ -45,8 +47,6 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 60),
-
-            // Username Field
             TextField(
               controller: usernameController,
               decoration: InputDecoration(
@@ -61,11 +61,9 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Password Field (without visibility icon)
             TextField(
               controller: passwordController,
-              obscureText: true,  // Always obscure the text
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: "Password",
                 prefixIcon: Icon(Icons.lock, color: Colors.grey[800]),
@@ -78,14 +76,12 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 60),
-
-            // Login Button
             PinkButton(
-              text: 'Login', 
+              text: 'Login',
               onPressed: () {
                 handleLogin(context);
               },
-            ), 
+            ),
           ],
         ),
       ),

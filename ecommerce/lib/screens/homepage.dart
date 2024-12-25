@@ -8,8 +8,10 @@ import 'package:ecommerce/models/recipient.dart';
 import 'package:ecommerce/models/product_detail.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -21,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index; 
       if (recipient == null) {
-        filteredProducts = productDetails; // Show all products
+        filteredProducts = productDetails; 
       } else {
         filteredProducts = productDetails.where((product) {
           return product.tags.contains(recipient);
@@ -44,74 +46,19 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             const SizedBox(height: 20),
-
-//reminder
-            Container(
-              padding: const EdgeInsets.all(20),
-              color: const Color(0xFFF98CA0),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Molika\'s Birthday',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.timer_outlined, color: Colors.white,),
-                      Text(' 10 days remaining',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  )
-                ]
+            
+            //Poster
+            SizedBox(
+              child: Image.asset(
+                'assets/poster.png',
+                width: double.infinity,
+                fit: BoxFit.fill,
               ),
             ),
-
             const SizedBox(height: 20),
 
-//trend product display
-            Container(
-              width: double.infinity,
-              color: const Color(0xFFF98CA0),
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/handmade_vase2.jpg',
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Trending Item',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Buy for your belove',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-//find the best choice
+            //find the best choice
             const Center(
               child: Text(
                 'Find the Best Choice',
@@ -122,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-//product filter by recipient
+            //product filter by recipient
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
@@ -184,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 2, // Display 2 items per row
                   crossAxisSpacing: 10.0, // Spacing between columns
                   mainAxisSpacing: 10.0, // Spacing between rows
-                  mainAxisExtent: 335, // Set fixed height for each card
+                  mainAxisExtent: 380, // Set fixed height for each card
                 ),
                 itemCount: filteredProducts.length,
                 itemBuilder: (context, index) {
@@ -193,29 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-
-//view more
-            Center(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.grey), // Set the border color
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangular shape (no rounded corners)
-                ),
-                onPressed: () {
-                  // Handle action for the 'View More' button
-                },
-                child: const Text(
-                  'VIEW MORE',
-                  style: TextStyle(
-                    color: Colors.black, // Set the text color
-                  ),
-                ),
-              ),
-            ),
-
             const SizedBox(height: 20),
-
           ],
         ),
       ),

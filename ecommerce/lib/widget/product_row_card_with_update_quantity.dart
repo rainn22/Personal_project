@@ -13,12 +13,12 @@ class CartItemWidget extends StatelessWidget {
   final CardMode mode;
 
   const CartItemWidget({
-    Key? key,
+    super.key,
     required this.cartItem,
     this.onRemove,
     this.onEditQuantity,
     required this.mode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +102,8 @@ class CartItemWidget extends StatelessWidget {
           children: [
             // Decrease Quantity
             Container(
+              width: 40,  // Set the width of the circle
+              height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.grey),
@@ -129,18 +131,20 @@ class CartItemWidget extends StatelessWidget {
 
             // Increase Quantity
             Container(
+              width: 40,  // Set the width of the circle
+              height: 40, // Set the height of the circle (same as width to make it a perfect circle)
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.grey),
               ),
               child: IconButton(
-                icon: const Icon(Icons.add, size: 16),
+                icon: const Icon(Icons.add, size: 16),  // Adjust the icon size as needed
                 onPressed: () {
-                  // Increase quantity
+                    // Increase quantity
                   onEditQuantity?.call(cartItem.quantity + 1);
                 },
               ),
-            ),
+            )
           ],
         ),
       ],

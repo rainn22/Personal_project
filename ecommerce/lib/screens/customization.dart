@@ -1,4 +1,4 @@
-import 'package:ecommerce/models/customization.dart';
+import 'package:ecommerce/models/customization_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +7,6 @@ class CustomzationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the customization provider
     final customizationProvider = Provider.of<CustomizationProvider>(context);
 
     return Scaffold(
@@ -17,10 +16,10 @@ class CustomzationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Wrap Gift Section
+
             const Text(
               "Wrap Gift",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFF98CA0)),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF98CA0)),
             ),
             for (var choice in WrapGiftChoices.values)
               RadioListTile<WrapGiftChoices>(
@@ -35,10 +34,9 @@ class CustomzationScreen extends StatelessWidget {
               ),
             const SizedBox(height: 20),
 
-            // Gift Card Section
             const Text(
               "Gift Card",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFF98CA0)),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF98CA0)),
             ),
             for (var card in GiftCard.values)
               RadioListTile<GiftCard>(
@@ -53,12 +51,12 @@ class CustomzationScreen extends StatelessWidget {
               ),
             const SizedBox(height: 20),
 
-            // Message Section
             const Text(
               "Your Message",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFF98CA0)),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF98CA0)),
             ),
             const SizedBox(height: 10),
+
             // Message Input
             TextField(
               maxLength: 160,
@@ -78,7 +76,6 @@ class CustomzationScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           child: ElevatedButton(
             onPressed: () {
-              // Navigate to Order Screen
               Navigator.pushNamed(context, '/order');
             },
             style: ElevatedButton.styleFrom(
